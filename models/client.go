@@ -18,10 +18,6 @@ import (
 	"github.com/Andosius/valorant-exporter/helpers"
 )
 
-var (
-	CLIENT_PLATFORM string = "ew0KCSJwbGF0Zm9ybVR5cGUiOiAiUEMiLA0KCSJwbGF0Zm9ybU9TIjogIldpbmRvd3MiLA0KCSJwbGF0Zm9ybU9TVmVyc2lvbiI6ICIxMC4wLjE5MDQyLjEuMjU2LjY0Yml0IiwNCgkicGxhdGZvcm1DaGlwc2V0IjogIlVua25vd24iDQp9"
-)
-
 type Client struct {
 	Lockfile        Lockfile
 	LocalAuthHeader string
@@ -198,7 +194,7 @@ func (c Client) GetGlobalHeader() map[string]string {
 	return map[string]string{
 		"Authorization":           "Bearer " + c.Entitlements.AccessToken,
 		"X-Riot-Entitlements-JWT": c.Entitlements.Token,
-		"X-Riot-ClientPlatform":   CLIENT_PLATFORM,
+		"X-Riot-ClientPlatform":   cfg.CLIENT_PLATFORM,
 		"X-Riot-ClientVersion":    api.Data.RiotClientVersion,
 	}
 }
