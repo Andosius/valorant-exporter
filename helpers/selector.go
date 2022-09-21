@@ -1,8 +1,9 @@
 package helpers
 
 /*
-	This package allows the user to answer an output-input-request.
-	Since there's almost no code, I'll not offer any documentation.
+	This struct and it's methods / functions allows the user to answer 
+	an output-input-request. Since there's almost no code, I'll not offer
+	any documentation.
 
 	You are still allowed to contact me via issues tho. :)
 */
