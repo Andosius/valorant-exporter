@@ -5,11 +5,15 @@ import (
 	"os"
 	"time"
 
+	"github.com/Andosius/valorant-exporter/cfg"
 	"github.com/Andosius/valorant-exporter/helpers"
 	"github.com/Andosius/valorant-exporter/models"
 )
 
 func main() {
+	// Create data directories first - prevent io errors
+	createDirectories()
+
 	// Expect Valorant to be running an try to locate files and fetch data
 	s := helpers.Selector{}
 
@@ -31,7 +35,7 @@ func main() {
 	case 1:
 
 		client.GetCurrentAccountSettings().WriteConfigToFile()
-		fmt.Println("Your configuration has been saved! Check", models.DATA_DIR, "folder.")
+		fmt.Println("Your configuration has been saved! Check", cfg.DATA_DIR, "folder.")
 
 	case 2:
 
@@ -58,4 +62,19 @@ func main() {
 		os.Exit(0)
 
 	}
+}
+
+func createDirectories() {
+	// Create data directory if it does not exist yet
+	if !Exists(cfg.DATA_DIR) {
+		err := os.Mkdir(cfg.DATA_DIR, cfg.PERMS)
+
+		helpers.Fatal("main.createDirectories:1", err)
+	}
+}
+
+// https://stackoverflow.com/a/22467409
+func Exists(name string) bool {
+	_, err := os.Stat(name)
+	return !os.IsNotExist(err)
 }
